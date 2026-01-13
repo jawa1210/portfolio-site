@@ -4,21 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio | Yuga Takizawa</title>
+
   <style>
     :root { --bg:#0b0f14; --card:#121826; --text:#e6edf3; --muted:#9aa4b2; --accent:#7aa2ff; }
     body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
     .wrap { max-width: 980px; margin: 0 auto; padding: 36px 18px 60px; }
+
     header { display:flex; gap:16px; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; }
     h1 { margin:0; font-size: 28px; letter-spacing: .2px; }
     .tagline { margin:8px 0 0; color:var(--muted); line-height:1.6; }
     .links a { color:var(--text); text-decoration:none; margin-left:12px; opacity:.9; }
     .links a:hover { color:var(--accent); }
 
+    /* Sections */
     .section { margin-top: 26px; }
     .section h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: .2px; }
+    .section-top {
+      margin-top: 30px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .section-lead{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
 
+    /* Layout */
     .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; }
-    .card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+    .stack { display:grid; gap:10px; }
+    .two { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    @media (max-width: 700px){ .two { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card {
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
     .badge { display:inline-block; font-size:12px; color:var(--muted); border:1px solid rgba(255,255,255,.12); padding:4px 10px; border-radius:999px; }
     .title { margin:10px 0 6px; font-size:16px; }
     .desc { margin:0; color:var(--muted); line-height:1.6; }
@@ -26,46 +52,94 @@
     .btn { display:inline-block; text-decoration:none; color:var(--text); border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:12px; }
     .btn:hover { border-color: rgba(122,162,255,.6); color: var(--accent); }
 
+    /* Media */
     .media { margin-top: 12px; border-radius: 14px; overflow:hidden; border:1px solid rgba(255,255,255,.10); background:#000; }
     video { display:block; width:100%; height:auto; background:#000; }
     img { display:block; width:100%; height:auto; }
 
-    .two { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    @media (max-width: 700px){ .two { grid-template-columns: 1fr; } }
-
-    /* “見た目トリミング”用：中央だけ見せる */
+    /* Video cropping (visual) */
     .cropbox { aspect-ratio: 16 / 9; }
     .cropbox video{
       width:100%;
       height:100%;
-      object-fit: cover;      /* はみ出た分を切る */
-      object-position: center;/* 中央基準 */
+      object-fit: cover;
+      object-position: center;
     }
+
+    /* Thumbnails for images/GIFs */
     .thumb {
-      aspect-ratio: 16 / 9;   /* 全部16:9に揃える */
+      aspect-ratio: 16 / 9;
       overflow: hidden;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
       background: #000;
     }
-
     .thumb img {
       width: 100%;
       height: 100%;
-      object-fit: cover;      /* はみ出た分をトリミング */
+      object-fit: cover;
       object-position: center;
       display: block;
     }
-
+    /* Use this when you want "no cropping" for panorama-like GIFs */
     .thumb img.contain {
       object-fit: contain;
       background: #000;
     }
 
+    /* KV (main research intro) */
+    .kv {
+      background: linear-gradient(180deg, rgba(122,162,255,.12), rgba(18,24,38,0));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .kv h2 { margin: 0 0 8px; font-size: 18px; }
+    .kv p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .links-row { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+    .small { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
+
+    /* ===== Lightbox (image modal) ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+      opacity: .85;
+    }
+    .lightbox .close:hover { opacity: 1; }
+
+    /* クリックできることを示す */
+    .thumb img {
+      cursor: zoom-in;
+    }
 
     footer { margin-top: 34px; color:var(--muted); font-size: 12px; }
-    .note { color:var(--muted); font-size: 12px; margin-top: 10px; line-height:1.6; }
-    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
   </style>
 </head>
 
@@ -76,7 +150,7 @@
         <h1>滝沢 悠雅 | Portfolio</h1>
         <p class="tagline">
           Robotics / Control / Simulation / Creative Tech<br />
-          ROS2・マルチエージェント制御・3D制作・ML などのプロジェクトを視覚中心でまとめています。
+          研究（メイン）を中心に、ロボット・制作・MLの成果を視覚的にまとめています。
         </p>
       </div>
       <div class="links">
@@ -87,120 +161,145 @@
     </header>
 
     <!-- =========================
-         Featured: TurtleBot Video
+         Research (Main)
          ========================= -->
-    <section class="section">
-      <h2>Featured Project</h2>
-      <article class="card">
-        <span class="badge">Robotics / ROS2</span>
-        <div class="title">TurtleBot 実機走行デモ</div>
-        <p class="desc">
-          ROS2上で構築したノード構成により、目標到達・障害物回避などの挙動を実機で確認したデモです。
+    <section class="section section-top">
+      <div class="kv">
+        <h2>Research (Main)</h2>
+        <p>
+          マルチエージェント制御（UAV/UGV）を中心に、安全性と効率性を両立するアルゴリズム設計と検証に取り組んでいます。
+          詳細は公開できないため、研究室の公式情報をご参照ください。
         </p>
 
-        <div class="media">
-          <video controls playsinline preload="auto" muted>
-            <source src="assets/turtle_bot.mp4" type="video/mp4" />
-            お使いのブラウザは video タグに対応していません。
-          </video>
+        <div class="links-row">
+          <!-- TODO: 畑中研公式サイトURLに差し替え -->
+          <a class="btn" href="https://hatanakalab.wixsite.com/website" target="_blank" rel="noopener">Hatanaka Lab (Official)</a>
+
+          <!-- TODO: YouTube動画URLに差し替え -->
+          <a class="btn" href="http://www.youtube.com/@hatanakalab9814" target="_blank" rel="noopener">YouTube (Video)</a>
+
+          <!-- TODO: YouTubeチャンネルURLに差し替え -->
+          <a class="btn" href=" target="_blank" rel="noopener">YouTube (Channel)</a>
         </div>
 
-        <div class="meta">
-          <a class="btn" href="https://github.com/jawa1210" target="_blank" rel="noopener">Repo</a>
-          <a class="btn" href="#" target="_blank" rel="noopener">Docs</a>
+        <div class="small">
+          ※本ページでは、公開可能な範囲で概要とデモのみ掲載しています。
         </div>
-
-        <p class="note">
-          配置：<code>assets/turtlebot.mp4</code> / サムネ：<code>assets/turtlebot_samune.png</code>
-        </p>
-      </article>
+      </div>
     </section>
 
     <!-- =========================
-         Simulation (cropped display)
+         Robotics Demos (TurtleBot combined)
          ========================= -->
-    <section class="section">
-      <h2>Simulation</h2>
+    <section class="section section-top">
+      <h2>Robotics Demos</h2>
+      <p class="section-lead">実機とシミュレーションのデモを並べて掲載し、挙動が一目で分かる形にしています。</p>
+
       <div class="grid">
         <article class="card">
-          <span class="badge">Robotics / Simulation</span>
-          <div class="title">TurtleBot Simulation（中央トリミング表示）</div>
+          <span class="badge">Robotics / ROS2</span>
+          <div class="title">TurtleBot: Real-world + Simulation</div>
           <p class="desc">
-            現状はHTML側で中央を切り抜いて表示しています（後でトリムしてmp4化して差し替えOK）。
+            TurtleBot の実機走行とシミュレーションのデモをまとめています。
           </p>
 
-          <div class="media cropbox">
-            <video controls playsinline preload="metadata">
-              <source src="assets/turtlebot_simu.mp4" type="video/mp4" />
-              お使いのブラウザは video タグに対応していません。
-            </video>
+          <div class="two">
+            <div class="media">
+              <video controls playsinline preload="auto" muted>
+                <source src="assets/turtle_bot.mp4" type="video/mp4" />
+                お使いのブラウザは video タグに対応していません。
+              </video>
+            </div>
+
+            <div class="media cropbox">
+              <video controls playsinline preload="metadata">
+                <source src="assets/turtlebot_simu.mp4" type="video/mp4" />
+                お使いのブラウザは video タグに対応していません。
+              </video>
+            </div>
           </div>
 
-          <p class="note">
-            配置：<code>assets/turtlebot_simu.mp4</code>（後で<code>mp4</code>差し替え可）
-          </p>
+          <div class="meta">
+            <!-- TODO: TurtleBotの専用Repoができたら差し替え -->
+            <a class="btn" href="https://github.com/jawa1210" target="_blank" rel="noopener">Repo</a>
+            <a class="btn" href="#" target="_blank" rel="noopener">Docs</a>
+          </div>
+
+          <div class="small">
+            Real: <code>assets/turtle_bot.mp4</code> / Sim: <code>assets/turtlebot_simu.mp4</code>
+          </div>
         </article>
       </div>
     </section>
 
     <!-- =========================
-         Minecraft Works
+         Minecraft / Creative Works (with official links + gallery)
          ========================= -->
-    <section class="section">
+    <section class="section section-top">
       <h2>Minecraft / Creative Works</h2>
-      <div class="grid">
+      <p class="section-lead">コミュニティ活動（今サバ）と、制作物（モデル/演出/スクリーンショット）をまとめています。</p>
 
+      <div class="grid">
+        <!-- Activity (今サバ) -->
+        <article class="card">
+          <span class="badge">Community / Creative</span>
+          <div class="title">今サバ（活動紹介）</div>
+          <p class="desc">
+            サーバー内での企画運営・制作（建築/モデル/演出）に継続的に取り組んでいます。公式情報はリンク先に掲載しています。
+          </p>
+          <div class="meta">
+            <!-- TODO: 今サバ公式サイト/公式X/Discord等のリンクに差し替え -->
+            <a class="btn" href="https://example.com" target="_blank" rel="noopener">Official</a>
+            <a class="btn" href="https://example.com" target="_blank" rel="noopener">Community</a>
+          </div>
+        </article>
+
+        <!-- SPL GIFs -->
         <article class="card">
           <span class="badge">3D / Blockbench</span>
           <div class="title">SPL Models（GIF）</div>
-          <p class="desc">
-            サーバー制作モデルのアニメーション例（GIF）。
-          </p>
+          <p class="desc">サーバー制作モデルのアニメーション例（GIF）。</p>
 
           <div class="two">
             <div class="thumb">
-              <img src="assets/spl_fox2_bear2.gif" />
+              <img src="assets/spl_fox2_bear2.gif" alt="SPL gif 1" />
             </div>
             <div class="thumb">
-              <img class="contain" src="assets/spl_rabbit5_fox4_bear4.gif" />
+              <!-- panorama-like GIF: avoid cropping -->
+              <img class="contain" src="assets/spl_rabbit5_fox4_bear4.gif" alt="SPL gif 2" />
             </div>
           </div>
-
-
-          <p class="note">
-            配置：<code>assets/spl_fox2_bear2.gif</code> / <code>assets/spl_rabbit5_fox4_bear4.gif</code>
-          </p>
         </article>
 
+        <!-- World images -->
         <article class="card">
           <span class="badge">Build / World</span>
           <div class="title">World / Monument（画像）</div>
-          <p class="desc">
-            マイクラ内での制作物・演出の例（スクリーンショット）。
-          </p>
+          <p class="desc">マイクラ内での制作物・演出の例（スクリーンショット）。</p>
 
           <div class="two">
             <div class="thumb">
-              <img src="assets/rajah.jpeg" />
+              <img src="assets/rajah.jpeg" alt="Rajah" />
             </div>
             <div class="thumb">
-              <img src="assets/monument.jpg" />
+              <img src="assets/monument.jpg" alt="Monument" />
             </div>
           </div>
 
-          <p class="note">
-            配置：<code>assets/rajah.jpeg</code> / <code>assets/monument.jpg</code>
-          </p>
+          <div class="small">
+            ※もし表示されない場合は、拡張子/大文字小文字/配置（assets/）を確認してください。
+          </div>
         </article>
-
       </div>
     </section>
 
     <!-- =========================
-         Horse Racing Prediction AI
+         Machine Learning Projects
          ========================= -->
-    <section class="section">
+    <section class="section section-top">
       <h2>Machine Learning Projects</h2>
+      <p class="section-lead">モデル設計・特徴量設計・再現性・評価の観点で、取り組みを簡潔に紹介します。</p>
+
       <div class="grid">
         <article class="card">
           <span class="badge">ML / XGBoost</span>
@@ -215,9 +314,9 @@
             <a class="btn" href="#" target="_blank" rel="noopener">Report</a>
           </div>
 
-          <p class="note">
+          <div class="small">
             ※ポートフォリオではML/再現性/評価の観点で紹介（買い方指南は書かない）
-          </p>
+          </div>
         </article>
       </div>
     </section>
@@ -228,7 +327,40 @@
   </div>
 
   <script>
+    // Year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxClose = document.getElementById("lightbox-close");
+
+    // すべての画像を対象にする
+    document.querySelectorAll(".thumb img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("open");
+      });
+    });
+
+    // 閉じる（×）
+    lightboxClose.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+    });
+
+    // 背景クリックでも閉じる
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("open");
+      }
+    });
   </script>
-</body>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Expanded view" />
+  </div>
+
+  </body>
 </html>
