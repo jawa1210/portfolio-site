@@ -41,6 +41,21 @@
       object-fit: cover;      /* はみ出た分を切る */
       object-position: center;/* 中央基準 */
     }
+    .thumb {
+      aspect-ratio: 16 / 9;   /* 全部16:9に揃える */
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: #000;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;      /* はみ出た分をトリミング */
+      object-position: center;
+      display: block;
+    }
 
     footer { margin-top: 34px; color:var(--muted); font-size: 12px; }
     .note { color:var(--muted); font-size: 12px; margin-top: 10px; line-height:1.6; }
@@ -137,13 +152,14 @@
           </p>
 
           <div class="two">
-            <div class="media">
-              <img src="assets/spl_fox2_bear2.gif" alt="SPL gif 1" />
+            <div class="thumb">
+              <img src="assets/spl_fox2_bear2.gif" />
             </div>
-            <div class="media">
-              <img src="assets/spl_rabbit5_fox4_bear4.gif" alt="SPL gif 2" />
+            <div class="thumb">
+              <img src="assets/spl_rabbit5_fox4_bear4.gif" />
             </div>
           </div>
+
 
           <p class="note">
             配置：<code>assets/spl_fox2_bear2.gif</code> / <code>assets/spl_rabbit5_fox4_bear4.gif</code>
@@ -158,11 +174,11 @@
           </p>
 
           <div class="two">
-            <div class="media">
-              <img src="assets/rajah.jpeg" alt="Rajah" />
+            <div class="thumb">
+              <img src="assets/rajah.jpeg" />
             </div>
-            <div class="media">
-              <img src="assets/monument.jpeg" alt="Monument" />
+            <div class="thumb">
+              <img src="assets/monument.jpeg" />
             </div>
           </div>
 
