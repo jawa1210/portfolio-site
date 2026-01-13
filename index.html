@@ -56,6 +56,12 @@
       object-position: center;
       display: block;
     }
+    /* 横長GIFは全体表示（左右カット防止） */
+    .thumb img.contain {
+      object-fit: contain;
+      background: #000;
+    }
+
 
     footer { margin-top: 34px; color:var(--muted); font-size: 12px; }
     .note { color:var(--muted); font-size: 12px; margin-top: 10px; line-height:1.6; }
