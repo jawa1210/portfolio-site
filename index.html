@@ -140,6 +140,48 @@
     }
 
     footer { margin-top: 34px; color:var(--muted); font-size: 12px; }
+
+    /* ===== YouTube Embed / Thumbnail Cards ===== */
+.yt-embed {
+  margin-top: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.yt-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.yt-thumb {
+  margin-top: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #000;
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.yt-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.yt-caption {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
   </style>
 </head>
 
@@ -147,10 +189,10 @@
   <div class="wrap">
     <header>
       <div>
-        <h1>滝沢 悠雅 | Portfolio</h1>
+        <h1>滝沢 悠雅の制作物あれこれ</h1>
         <p class="tagline">
-          Robotics / Control / Simulation / Creative Tech<br />
-          研究を中心に、ロボット・制作・MLの個人成果を掲載しています。
+          制御工学 / ROS2 / モデリング(Block Bench) / 活動・企画運営<br />
+          本ページでは私自身の研究と、その他研究外での制作物・プロジェクトをまとめています。
         </p>
       </div>
       <div class="links">
@@ -176,11 +218,23 @@
           <a class="btn" href="https://hatanakalab.wixsite.com/website" target="_blank" rel="noopener">Hatanaka Lab (Official)</a>
 
           <!-- TODO: YouTube動画URLに差し替え -->
-          <a class="btn" href="http://www.youtube.com/@hatanakalab9814" target="_blank" rel="noopener">YouTube (Video)</a>
+          <a class="btn" href="hhttps://youtu.be/G1HbVxrfexk?si=EC8C0VkqvMf3oxYc" target="_blank" rel="noopener">YouTube (Video)</a>
 
           <!-- TODO: YouTubeチャンネルURLに差し替え -->
-          <a class="btn" href=" target="_blank" rel="noopener">YouTube (Channel)</a>
+          <a class="btn" href="https://www.youtube.com/@hatanakalab9814" target="_blank" rel="noopener">YouTube (Channel)</a>
+
         </div>
+
+        <div class="yt-embed">
+          <!-- TODO: VIDEO_ID を差し替え -->
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/G1HbVxrfexk?si=EC8C0VkqvMf3oxYc"
+            title="YouTube video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
 
         <div class="small">
           ※本ページでは、公開可能な範囲で概要とデモのみ掲載しています。
@@ -252,6 +306,16 @@
             <!-- TODO: 今サバ公式サイト/公式X/Discord等のリンクに差し替え -->
             <a class="btn" href="https://www.imaginationserver.com/" target="_blank" rel="noopener">Official</a>
           </div>
+
+          <div class="yt-embed">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/yArGwsuPw_Y?si=SvJyPboKjEpsgERW"
+              title="Imagination Server YouTube"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+
         </article>
 
         <!-- SPL GIFs -->
