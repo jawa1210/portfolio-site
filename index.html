@@ -182,6 +182,24 @@
   line-height: 1.6;
 }
 
+/* 縦並びギャラリー */
+.column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.list {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 13px;
+}
+.list li { margin: 6px 0; }
+.list b { color: var(--text); font-weight: 600; }
+
+
   </style>
 </head>
 
@@ -222,8 +240,32 @@
 
           <!-- TODO: YouTubeチャンネルURLに差し替え -->
           <a class="btn" href="https://www.youtube.com/@hatanakalab9814" target="_blank" rel="noopener">YouTube (Channel)</a>
-
+        
         </div>
+
+        <ul class="list">
+          <li><b>Award</b>（優秀発表賞）: 第67回 自動制御連合講演会（2024年11月）
+            「多角度撮影型被覆制御の農地フィールド実験」（口頭発表・共著）
+          </li>
+        
+          <li><b>Poster</b>: 第15回 横幹コンファレンス（2024年12月）
+            「Coverage Control Experiment over Actual Farm」（ポスター・共著）
+          </li>
+        
+          <li><b>Poster</b>: SSSマッチングWS（2024年6月）
+            「Automating Drone Operations on Smart Agriculture R&amp;E Field」
+          </li>
+        
+          <li><b>Poster</b>: SSSマッチングWS（2024年12月）
+            「Implementing Coverage Control on Education Farm」
+          </li>
+        
+          <li><b>Upcoming</b>: 2026年2月 デンソーにてポスター発表（予定）</li>
+          <li><b>Upcoming</b>: 2026年5月 共著の国際学会論文（予定）</li>
+          <li><b>Upcoming</b>: 2026年7月 主著の国際学会論文投稿（予定）</li>
+        </ul>
+        
+
 
         <div class="yt-embed">
           <!-- TODO: VIDEO_ID を差し替え -->
@@ -291,7 +333,8 @@
          ========================= -->
     <section class="section section-top">
       <h2>Minecraft / Creative Works</h2>
-      <p class="section-lead">Imagination Serverでのコミュニティ活動での、制作物をまとめています。Imaginetion Serverとは東京ディズニーリゾートを愛するクリエイターたちが、
+      <p class="section-lead">Imagination Serverでのコミュニティ活動での、制作物をまとめています。<br />
+        Imaginetion Serverとは東京ディズニーリゾートを愛するクリエイターたちが、
         Minecraft: Bedrock Editionを用いて東京ディズニーリゾートを完全再現するプロジェクトです。2016年8月に発足したこのプロジェクトは、有志の学生, 社会人によって非営利で運営されています。</p>
 
       <div class="grid">
@@ -300,7 +343,9 @@
           <span class="badge">Community / Creative</span>
           <div class="title">Imagination Server（活動紹介）</div>
           <p class="desc">
-            サーバー内での企画運営・制作（建築/モデル/演出）に継続的に取り組んでいます。(2016~) 以下は制作物を掲載していますが、2023年まで運営チームとして、マネージャー、プロジェクトマネージャー、法規の策定等も行ってきました。公式情報はリンク先に掲載しています。
+            サーバー内での企画運営・制作（建築/モデル/演出）に継続的に取り組んでいます。(2016~) <br />
+            以下は制作物を掲載していますが、2023年まで運営チームとして、マネージャー、プロジェクトマネージャー、法規の策定等も行ってきました。<br />
+            公式情報はリンク先に掲載しています。
           </p>
           <div class="meta">
             <!-- TODO: 今サバ公式サイト/公式X/Discord等のリンクに差し替え -->
@@ -324,15 +369,15 @@
           <div class="title">SPL Models（GIF）</div>
           <p class="desc">サーバー制作モデルのアニメーション例。</p>
 
-          <div class="two">
+          <div class="column">
             <div class="thumb">
               <img src="assets/spl_fox2_bear2.gif" alt="SPL gif 1" />
             </div>
             <div class="thumb">
-              <!-- panorama-like GIF: avoid cropping -->
               <img class="contain" src="assets/spl_rabbit5_fox4_bear4.gif" alt="SPL gif 2" />
             </div>
           </div>
+
         </article>
 
         <!-- World images -->
@@ -341,7 +386,7 @@
           <div class="title">World / Monument（画像）</div>
           <p class="desc">マイクラ内での制作物の例。その他ワールド内建築も行いました</p>
 
-          <div class="two">
+          <div class="colmun">
             <div class="thumb">
               <img src="assets/rajah.jpeg" alt="Rajah" />
             </div>
